@@ -1,5 +1,4 @@
 # Write your MySQL query statement below
-#Akhil123
 with temp as(
 select year,Wimbledon as games from Championships
 union all
