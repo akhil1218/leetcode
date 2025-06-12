@@ -1,17 +1,21 @@
 class Solution:
     def moveZeroes(self, nums: List[int]) -> None:
-        for i in range(len(nums)):
-            for j in range(i+1,len(nums)):
-                if nums[i]==0:
-                    if nums[j]!=0:
-                        t=nums[i]
-                        nums[i]=nums[j]
-                        nums[j]=t
-                        break
+        i=0
+        for j in range(len(nums)):
+            if j+1<len(nums):
+                if nums[j]==0:
+                    if nums[j+1]==0:
+                        pass
                     else:
-                        j+=1
+                        t=nums[j]
+                        nums[i]=nums[j+1]
+                        nums[j+1]=t
+                        i+=1
                 else:
-                        break
+                    i+=1
+                    pass
+                
+
 
                     
         
