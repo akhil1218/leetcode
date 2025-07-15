@@ -1,4 +1,5 @@
 # Write your MySQL query statement below
-with all_details as(
-select id,student,lead(id) over(order by id) as next_id,lag(id) over(order by id)as last_id from Seat)
-select case when id%2=0 then last_id when id%2=1 and next_id is null then id when id%2=1 then next_id end as id,student from all_details order by 1
+select id,case when id%2=0 then pre_st
+when id%2=1 and id in(select max(id) from Seat) then student
+else nxt_st end as student from(
+select id,student,lead(student) over(order by id) as nxt_st,lag(student) over(order by id) as pre_st from Seat)a order by 1
