@@ -1,22 +1,6 @@
 # Write your MySQL query statement below
-WITH DailyRevenue AS (
-    SELECT visited_on, SUM(amount) AS amount
-    FROM Customer
-    GROUP BY visited_on
+with customer_final as(
+    select visited_on,sum(amount) as total_amount from Customer group by 1
 )
-SELECT
-    a.visited_on,
-    SUM(b.amount) AS amount,
-    ROUND(SUM(b.amount) / 7, 2) AS average_amount
-FROM
-    DailyRevenue a
-JOIN
-    DailyRevenue b
-ON
-    b.visited_on BETWEEN DATE_SUB(a.visited_on, INTERVAL 6 DAY) AND a.visited_on
-GROUP BY
-    a.visited_on
-HAVING
-    COUNT(DISTINCT b.visited_on) = 7
-ORDER BY
-    a.visited_on;
+select visited_on,amount,round(amount/7,2) as average_amount from(
+select visited_on,sum(total_amount) over(order by visited_on rows between 6 preceding and current row) as amount,count(*) over(order by visited_on rows between 6 preceding and current row) as days_count from customer_final)t where days_count=7 order by 1
