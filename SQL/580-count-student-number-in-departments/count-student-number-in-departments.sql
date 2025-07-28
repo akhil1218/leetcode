@@ -1,2 +1,2 @@
 # Write your MySQL query statement below
-select dept_name,coalesce(count(student_id),0) as student_number from Department d left join Student s on s.dept_id=d.dept_id group by dept_name order by student_number desc,dept_name
+select dept_name,count(student_id) as student_number from Department d left join Student s on s.dept_id=d.dept_id group by dept_name order by student_number desc,dept_name
