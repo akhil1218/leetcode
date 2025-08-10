@@ -1,6 +1,6 @@
 # Write your MySQL query statement below
-with friends_list as(
+with all_ids as(
 select requester_id as id from RequestAccepted
 UNION ALL
 select accepter_id as id from RequestAccepted)
-select id,count(*) as num from friends_list group by id order by num desc limit 1
+select id,count(*) as num from all_ids group by id order by num desc limit 1
