@@ -1,3 +1,3 @@
 # Write your MySQL query statement below
 select id from(
-select id,recordDate as current_day,temperature as current_temp,lag(recordDate,1) over(order by recordDate) as prev_day,lag(temperature,1) over(order by recordDate) as prev_temp from Weather)a where current_temp>prev_temp and datediff(current_day,prev_day)=1
+select id,recordDate,temperature,lag(recordDate) over(order by recordDate) as pre_day,lag(temperature) over(order by recordDate) as prev_day from Weather) a where temperature>prev_day and recordDate=date_add(pre_day, Interval 1 day)
