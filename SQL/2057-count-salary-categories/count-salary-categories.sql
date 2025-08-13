@@ -1,6 +1,6 @@
 # Write your MySQL query statement below
-select 'Low Salary' as category,count(case when income<20000 then 1 else null end) as accounts_count from Accounts group by 1
+select "Low Salary" as category, count(account_id) as accounts_count from Accounts where income<20000
 union all
-select 'Average Salary' as category,count(case when income>=20000 and income<=50000 then 1 else null end) as accounts_count from Accounts group by 1
+select "Average Salary" as category, count(account_id) as accounts_count from Accounts where income>=20000 and income<=50000
 union all
-select 'High Salary' as category,count(case when income>50000 then 1 else null end) as accounts_count from Accounts group by 1
+select "High Salary" as category, count(account_id) as accounts_count from Accounts where income>50000
